@@ -33,6 +33,13 @@ import java.util.Arrays;
 @Configuration
 @EnableWebSecurity
 public class Webconfig {
+
+//    @Bean
+//    CorsFilter corsFilter(){
+//        CorsFilter filter = new CorsFilter();
+//        return filter;
+//    }
+
     @Bean
     public UserDetailsService userDetailsService() {
         return new CustomerUserDetailsService();
@@ -46,7 +53,7 @@ public class Webconfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .cors(cors->cors.configurationSource(configurationSource()))
+                .cors(cord ->cord.configurationSource(configurationSource()))
                 .csrf().disable()
                 .authorizeHttpRequests((authorize -> authorize
                         .requestMatchers("/register","/login","/Home").permitAll()
@@ -54,16 +61,18 @@ public class Webconfig {
                 .formLogin(form -> form
                         .defaultSuccessUrl("/login")
                         .defaultSuccessUrl("/Home")
+                        .passwordParameter("password")
+                        .usernameParameter("username")
                         .permitAll());
         return http.build();
     }
     @Bean
     CorsConfigurationSource configurationSource (){
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200","*"));
+        configuration.setAllowedOriginPatterns(Arrays.asList("http://localhost:4200","*"));
         configuration.setAllowedMethods(Arrays.asList("POST","GET","DELETE","PUT"));
-        configuration.setAllowedHeaders(Arrays.asList("authorization", "content-type", "x-auth-token"));
-        configuration.setAllowCredentials(false);
+        configuration.setAllowedHeaders(Arrays.asList("authorization", "content-type", "X-auth-token"));
+        configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**",configuration);
         return source;
@@ -89,4 +98,5 @@ public class Webconfig {
             }
         };
     }
+
 }
