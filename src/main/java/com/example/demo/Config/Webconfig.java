@@ -39,11 +39,6 @@ import java.util.Arrays;
 @EnableWebSecurity
 public class Webconfig {
 
-//    @Bean
-//    CorsFilter corsFilter(){
-//        CorsFilter filter = new CorsFilter();
-//        return filter;
-//    }
 
     @Bean
     public UserDetailsService userDetailsService() {
