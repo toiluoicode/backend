@@ -15,12 +15,6 @@ public class HomeController {
     public String helo (){
         return "helo";
     }
-
-    @CrossOrigin(value = "http://localhost:4200")
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String login (){
-        return "helo";
-    }
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     @CrossOrigin(value = "http://localhost:4200")
     public ResponseEntity<?> register(@RequestBody User user) {

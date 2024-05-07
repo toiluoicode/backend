@@ -57,7 +57,7 @@ public class Webconfig {
                 .csrf().disable()
                 .authorizeHttpRequests((authorize -> authorize
                         .requestMatchers("/register","/login","/Home").permitAll()
-                        .anyRequest().authenticated()))
+                        .anyRequest().permitAll()))
                 .formLogin(form -> form
                         .successHandler(new AuthenticationSuccessHandler() {
                             @Override
@@ -65,8 +65,6 @@ public class Webconfig {
                                 response.setStatus(HttpServletResponse.SC_OK);
                             }
                         })
-                        .passwordParameter("password")
-                        .usernameParameter("username")
                         .permitAll());
         return http.build();
     }
@@ -93,7 +91,6 @@ public class Webconfig {
                 if (user == null || check == false) {
                     throw new BadCredentialsException("Username or password is incorrect.");
                 }
-
                 return new UsernamePasswordAuthenticationToken(user, password, user.getAuthorities());
             }
             @Override

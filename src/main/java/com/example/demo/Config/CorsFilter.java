@@ -3,12 +3,21 @@ package com.example.demo.Config;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.io.IOException;
 
-public class CorsFilter implements Filter {
+
+public class CorsFilter implements Filter  {
+
+
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
 
@@ -22,10 +31,13 @@ public class CorsFilter implements Filter {
         response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Methods", "GET,POST,DELETE,PUT,OPTIONS");
         response.setHeader("Access-Control-Allow-Headers", "*");
-        response.setHeader("Access-Control-Allow-Credentials", String.valueOf(true));
-        response.setHeader("Access-Control-Max-Age", String.valueOf(180));
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Max-Age", "180");
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
+    @Override
+    public void destroy() {
 
+    }
 }
