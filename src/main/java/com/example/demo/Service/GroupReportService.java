@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface GroupReportService {
+
     List<GroupReport> findAll ();
 
     GroupReport addGroupReport (GroupReport groupReport);

@@ -20,6 +20,11 @@ public class GroupReport {
         this.reports = reports;
     }
 
+    public GroupReport(int id, String groupReport) {
+        this.id = id;
+        this.groupReport = groupReport;
+    }
+
     public GroupReport() {
     }
 
