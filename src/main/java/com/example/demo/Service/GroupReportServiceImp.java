@@ -44,12 +44,25 @@ public class GroupReportServiceImp implements GroupReportService {
         List<GroupReport> groupReports = new ArrayList<>();
         groupReports.add(groupReport);
         if (groupReports.size() > 0){
-            groupReport.getReports().remove(findIndex(  groupReport.getReports(),IdReport));
+            groupReport.getReports().remove(findIndex(groupReport.getReports(),IdReport));
             this.reportRepository.save(groupReport);
             return true;
         }else{
             return false;
         }
+    }
+
+    @Override
+    public boolean updateReport(int Id, String IdReport, Report updateReport) {
+        GroupReport groupReport = this.reportRepository.findById(Id);
+        List<GroupReport> groupReports = new ArrayList<>();
+        groupReports.add(groupReport);
+        if(groupReports.size()>0){
+            groupReport.getReports().set(findIndex(groupReport.getReports(),IdReport),updateReport);
+            this.reportRepository.save(groupReport);
+            return true;
+        }else
+            return false;
     }
 
     public int findIndex (List<Report> reports, String name){
@@ -60,6 +73,21 @@ public class GroupReportServiceImp implements GroupReportService {
         }
         return -1;
     }
+//    @Override
+//    public boolean saveReport(int id, Report report) {
+//        GroupReport groupReport = this.reportRepository.findById(id);
+//        if (groupReport != null) {
+//            int index = findIndex(groupReport.getReports(), report.getMaNhom());
+//            if (index == -1) {
+//                groupReport.getReports().add(report);
+//            } else {
+//                groupReport.getReports().set(index, report);
+//            }
+//            this.reportRepository.save(groupReport);
+//            return true;
+//        }
+//        return false;
+//    }
 
 
 }

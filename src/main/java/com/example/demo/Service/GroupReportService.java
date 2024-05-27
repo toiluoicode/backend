@@ -15,4 +15,6 @@ public interface GroupReportService {
     boolean addReport (int Id , Report report);
 
     boolean deleteReport (int Id , String IdReport);
+    boolean updateReport(int Id,String IdReport, Report updatedReport);
+//    boolean saveReport(int Id, Report report);
 }

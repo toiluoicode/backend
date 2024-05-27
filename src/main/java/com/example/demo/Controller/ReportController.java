@@ -28,19 +28,37 @@ public class ReportController {
     public ResponseEntity<?> addReport (@PathVariable int id , @RequestBody Report report){
         boolean check = this.groupReportServiceImp.addReport(id,report);
         if(check){
-            return ResponseEntity.status(200).body("success");
+            return ResponseEntity.status(200).body("{\"message\": \"success\"}");
         }else {
-            return ResponseEntity.status(404).body("fails");
+            return ResponseEntity.status(404).body("{\"message\": \"fails\"}");
+        }
+    }
+    @PutMapping("/updateReport/{Id}/{IdReport}")
+    public ResponseEntity<?> updatedeleteReport (@PathVariable int Id , @PathVariable String IdReport,@RequestBody Report updateReport){
+        boolean check = this.groupReportServiceImp.updateReport(Id,IdReport,updateReport);
+        if(check){
+            return ResponseEntity.status(200).body("{\"message\": \"success\"}");
+        }else {
+            return ResponseEntity.status(404).body("{\"message\": \"fails\"}");
         }
     }
     @DeleteMapping("/deleteReport/{Id}/{IdReport}")
     public ResponseEntity<?> deleteReport (@PathVariable int Id , @PathVariable String IdReport){
         boolean check = this.groupReportServiceImp.deleteReport(Id,IdReport);
         if(check){
-            return ResponseEntity.status(200).body("success");
+            return ResponseEntity.status(200).body("{\"message\": \"success\"}");
         }else {
-            return ResponseEntity.status(404).body("fails");
+            return ResponseEntity.status(404).body("{\"message\": \"fails\"}");
         }
     }
 
+//    @PostMapping("/saveReport/{id}")
+//    public ResponseEntity<?> saveReport(@PathVariable int id, @RequestBody Report report) {
+//        boolean check = this.groupReportServiceImp.saveReport(id, report);
+//        if (check) {
+//            return ResponseEntity.status(200).body("{\"message\": \"success\"}");
+//        } else {
+//            return ResponseEntity.status(404).body("{\"message\": \"fails\"}");
+//        }
+//    }
 }
