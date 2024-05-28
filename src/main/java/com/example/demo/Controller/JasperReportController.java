@@ -18,14 +18,14 @@ import java.util.Map;
 public class JasperReportController {
     @GetMapping("/helo")
     public String hello () throws JRException, FileNotFoundException {
-        InputStream reportInput = new FileInputStream("C:\\Users\\thuan\\JaspersoftWorkspace\\MyReports\\hello.jrxml");
+        InputStream reportInput = new FileInputStream("C:\\Users\\ACER\\JaspersoftWorkspace\\MyReports\\hello.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(reportInput);
         Map<String, Object> parameters  = new HashMap<>();
         parameters .put("hello","hello");
 
         System.out.println(parameters.get("hello"));
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters , new JREmptyDataSource());
-        JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\thuan\\helo.pdf");
+        JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\ACER\\helo.pdf");
         return "hello";
     }
 }

@@ -43,14 +43,14 @@ public class ConnectionController {
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(documents);
 
         // Nạp file JRXML template
-        InputStream reportInput = new FileInputStream("C:\\Users\\thuan\\JaspersoftWorkspace\\MyReports\\hello.jrxml");
+        InputStream reportInput = new FileInputStream("C:\\Users\\ACER\\JaspersoftWorkspace\\MyReports\\hello.jrxml");
         // Biên dịch template
         JasperReport jasperReport = JasperCompileManager.compileReport(reportInput);
 
         // Điền dữ liệu vào báo cáo
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
 
-        JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\thuan\\helo.pdf");
+        JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\ACER\\helo.pdf");
         return "ing";
     }
 
