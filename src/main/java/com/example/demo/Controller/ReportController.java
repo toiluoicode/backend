@@ -52,13 +52,4 @@ public class ReportController {
         }
     }
 
-//    @PostMapping("/saveReport/{id}")
-//    public ResponseEntity<?> saveReport(@PathVariable int id, @RequestBody Report report) {
-//        boolean check = this.groupReportServiceImp.saveReport(id, report);
-//        if (check) {
-//            return ResponseEntity.status(200).body("{\"message\": \"success\"}");
-//        } else {
-//            return ResponseEntity.status(404).body("{\"message\": \"fails\"}");
-//        }
-//    }
 }
