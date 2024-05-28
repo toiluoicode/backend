@@ -10,10 +10,8 @@ import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -24,15 +22,20 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "connect")
+@RequestMapping(value = "connectDB")
 public class ConnectionController {
     @Autowired
     private DatabaseService databaseService;
 
     @GetMapping("/db")
-    public String Connect (){
-        databaseService.Connect("mongodb://localhost:27017/BenhVien");
-        return "ramus";
+    public ResponseEntity<?> Connect (@RequestParam(name = "connectionString" , required = true) String URL){
+        if ( URL != null)
+        {
+          databaseService.Connect(URL);
+
+            return ResponseEntity.status(201).body("{\"message\": \"success\"}");
+        }
+        return ResponseEntity.status(201).body("{\"message\": \"failed\"}");
     }
     @GetMapping("/in")
     public String Print () throws JRException, FileNotFoundException {

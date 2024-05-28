@@ -6,13 +6,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "connect")
 public class Connect {
-    private String MaKN;
+    @Id
+    private String maKN;
     private String TenKN;
     private String URL;
     private String User;
     private String Password;
     public Connect(String MaKN, String tenKN, String URL, String user, String password) {
-        this.MaKN = MaKN;
+        this.maKN = MaKN;
         this.TenKN = tenKN;
         this.URL = URL;
         this.User = user;
@@ -23,12 +24,13 @@ public class Connect {
     }
     @JsonProperty("MaKN")
     public String getMaKN() {
-        return MaKN;
+        return maKN;
     }
 
-    public void setMaKN(String MaKN) {
-        MaKN = MaKN;
+    public void setMaKN(String maKN) {
+        this.maKN = maKN;
     }
+
     @JsonProperty("TenKN")
     public String getTenKN() {
         return TenKN;

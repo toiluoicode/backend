@@ -12,6 +12,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/connect")
 public class ConnectController {
+    /// connnect với db
     @Autowired
     ConnectServiceImp connectServiceImp;
     @GetMapping("/findAll")
@@ -20,6 +21,7 @@ public class ConnectController {
     }
     @PostMapping("/addConnect")
     public ResponseEntity<?> addConnect(@RequestBody Connect connect){
+        System.out.println(connect.getMaKN());
         boolean success= connectServiceImp.addConnect(connect);
         if(success)
             return ResponseEntity.status(201).body("{\"message\": \"success\"}");
@@ -28,6 +30,8 @@ public class ConnectController {
     }
     @PutMapping("/updateConnect/{id}")
     public ResponseEntity<?> updateConnect(@PathVariable String id,@RequestBody Connect connect){
+        System.out.println(connect.getMaKN() + " " + connect.getTenKN() + " " + connect.getURL() + " " + connect.getUser() + " " + connect.getPassword());
+
         boolean success =connectServiceImp.updateConnect(id,connect);
         if(success)
             return ResponseEntity.status(201).body("{\"message\": \"success\"}");
