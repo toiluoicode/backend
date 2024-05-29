@@ -11,8 +11,8 @@ public class Connect {
     private String URL;
     private String User;
     private String Password;
-    public Connect(String MaKN, String tenKN, String URL, String user, String password) {
-        this.MaKN = MaKN;
+    public Connect(String maKN, String tenKN, String URL, String user, String password) {
+        this.MaKN = maKN;
         this.TenKN = tenKN;
         this.URL = URL;
         this.User = user;
@@ -26,9 +26,11 @@ public class Connect {
         return MaKN;
     }
 
-    public void setMaKN(String MaKN) {
-        MaKN = MaKN;
+    public void setMaKN(String maKN) {
+        MaKN = maKN;
     }
+
+
     @JsonProperty("TenKN")
     public String getTenKN() {
         return TenKN;
