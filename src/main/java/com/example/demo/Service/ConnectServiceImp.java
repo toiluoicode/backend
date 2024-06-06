@@ -36,6 +36,7 @@ public class ConnectServiceImp implements ConnectService{
             connectUpdate.setURL(updateConnect.getURL());
             connectUpdate.setUser(updateConnect.getUser());
             connectUpdate.setPassword(updateConnect.getPassword());
+            connectRepository.save(connectUpdate);
             return true;
         }
         return false;
