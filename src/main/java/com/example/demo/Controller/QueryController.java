@@ -35,4 +35,12 @@ public class QueryController {
         else
             return ResponseEntity.status(400).body("{\"message\": \"error\"}");
     }
+    @PutMapping("/updateQuery/{id}")
+    public ResponseEntity<?> updateQuery(@PathVariable String id,@RequestBody Query query){
+        boolean success =queryServiceImp.updateQuery(id,query);
+        if(success)
+            return ResponseEntity.status(201).body("{\"message\": \"success\"}");
+        else
+            return ResponseEntity.status(400).body("{\"message\": \"error\"}");
+    }
 }
