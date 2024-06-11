@@ -1,5 +1,6 @@
 package com.example.demo.Controller;
 
+import com.example.demo.DTO.QueryDTO;
 import com.example.demo.Service.DatabaseService;
 import jakarta.servlet.http.HttpServletResponse;
 import net.sf.jasperreports.engine.*;
@@ -55,6 +56,17 @@ public class ConnectionController {
 
         JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\ACER\\helo.pdf");
         return "ing";
+    }
+    @GetMapping("/execute")
+    public String PrintQuery (HttpServletResponse response,@RequestBody QueryDTO query) throws JRException, FileNotFoundException {
+    String queryString = query.getQuery();
+    List<Map> documents = databaseService.excutequery(queryString,"BenhNhan");
+    JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(documents);
+    InputStream reportInput = new FileInputStream("C:\\Users\\ACER\\JaspersoftWorkspace\\MyReports\\PCDXN.jrxml");
+    JasperReport jasperReport = JasperCompileManager.compileReport(reportInput);
+    JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+    JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\ACER\\helo.pdf");
+    return "ing";
     }
 
 }

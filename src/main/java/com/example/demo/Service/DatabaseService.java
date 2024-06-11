@@ -1,12 +1,12 @@
 package com.example.demo.Service;
 
 import com.example.demo.Config.MongoDbConfig;
+import com.example.demo.Models.Query;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.BasicQuery;
 import org.springframework.stereotype.Service;
 
 import java.net.URISyntaxException;
@@ -32,5 +32,10 @@ public class DatabaseService {
     }
     public List<Map> findAllDocuments(String collectionName) {
         return mongoTemplate.findAll(Map.class, collectionName);
+    }
+
+    public List<Map> excutequery(String query, String collectionName) {
+        BasicQuery query1 = new BasicQuery(query);
+        return mongoTemplate.find(query1,Map.class, collectionName);
     }
 }
