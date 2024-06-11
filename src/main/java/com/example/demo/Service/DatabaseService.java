@@ -25,7 +25,7 @@ public class DatabaseService {
     public void Connect (String uri){
         try {
             mongoTemplate = mongoDbConfig.createMongoTemplate(uri);
-            System.out.println("THanfh cong");
+            System.out.println("Thành cong");
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }

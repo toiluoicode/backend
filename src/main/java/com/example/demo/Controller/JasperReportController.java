@@ -18,7 +18,7 @@ import java.util.Map;
 public class JasperReportController {
     @GetMapping("/helo")
     public String hello () throws JRException, FileNotFoundException {
-        InputStream reportInput = new FileInputStream("C:\\Users\\ACER\\JaspersoftWorkspace\\MyReports\\hello.jrxml");
+        InputStream reportInput = new FileInputStream("C:\\Users\\ACER\\JaspersoftWorkspace\\MyReports\\BangkeCPKB.jrxml");
         JasperReport jasperReport = JasperCompileManager.compileReport(reportInput);
         Map<String, Object> parameters  = new HashMap<>();
         parameters .put("hello","hello");

@@ -12,6 +12,7 @@ public class Connect {
     private String URL;
     private String User;
     private String Password;
+
     public Connect(String MaKN, String tenKN, String URL, String user, String password) {
         this.maKN = MaKN;
         this.TenKN = tenKN;

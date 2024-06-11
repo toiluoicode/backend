@@ -38,18 +38,18 @@ public class ConnectionController {
         return ResponseEntity.status(201).body("{\"message\": \"failed\"}");
     }
     @GetMapping("/in")
-    public String Print () throws JRException, FileNotFoundException {
+    public String Print (HttpServletResponse response) throws JRException, FileNotFoundException {
         // Lấy dữ liệu từ MongoDB
-        List<Map> documents = databaseService.findAllDocuments("TTBN");
+        List<Map> documents = databaseService.findAllDocuments("TTTN");
         System.out.println(documents);
         // Chuyển đổi List<Document> thành JRBeanCollectionDataSource
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(documents);
 
         // Nạp file JRXML template
-        InputStream reportInput = new FileInputStream("C:\\Users\\ACER\\JaspersoftWorkspace\\MyReports\\hello.jrxml");
-        // Biên dịch template
+        InputStream reportInput = new FileInputStream("C:\\Users\\ACER\\JaspersoftWorkspace\\MyReports\\PCDXN.jrxml");
+//        // Biên dịch template
         JasperReport jasperReport = JasperCompileManager.compileReport(reportInput);
-
+//
         // Điền dữ liệu vào báo cáo
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
 
