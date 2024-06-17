@@ -22,7 +22,6 @@ public class JasperReportController {
         JasperReport jasperReport = JasperCompileManager.compileReport(reportInput);
         Map<String, Object> parameters  = new HashMap<>();
         parameters .put("hello","hello");
-
         System.out.println(parameters.get("hello"));
         JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters , new JREmptyDataSource());
         JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\ACER\\helo.pdf");

@@ -60,13 +60,15 @@ public class ConnectionController {
     @GetMapping("/execute")
     public String PrintQuery (HttpServletResponse response,@RequestBody QueryDTO query) throws JRException, FileNotFoundException {
     String queryString = query.getQuery();
-    List<Map> documents = databaseService.excutequery(queryString,"BenhNhan");
+    List<Map> documents = databaseService.excutequery(queryString,"TTTN");
+//    System.out.println(documents);
     JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(documents);
-    InputStream reportInput = new FileInputStream("C:\\Users\\ACER\\JaspersoftWorkspace\\MyReports\\PCDXN.jrxml");
+    InputStream reportInput = new FileInputStream("C:\\Users\\ACER\\JaspersoftWorkspace\\MyReports\\test.jrxml");
     JasperReport jasperReport = JasperCompileManager.compileReport(reportInput);
     JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
     JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\ACER\\helo.pdf");
-    return "ing";
+//    System.out.println(jasperPrint);
+    return  documents.toString();
     }
 
 }
