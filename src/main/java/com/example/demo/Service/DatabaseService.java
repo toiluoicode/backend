@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Service
 public class DatabaseService {
@@ -37,5 +38,8 @@ public class DatabaseService {
     public List<Map> excutequery(String query, String collectionName) {
         BasicQuery query1 = new BasicQuery(query);
         return mongoTemplate.find(query1,Map.class, collectionName);
+    }
+    public Set<String> ListDatabase (){
+        return  mongoTemplate.getCollectionNames();
     }
 }

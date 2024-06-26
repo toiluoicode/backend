@@ -8,6 +8,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimpleOutputStreamExporterOutput;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -21,6 +22,7 @@ import java.lang.annotation.Documented;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "connectDB")
@@ -61,14 +63,36 @@ public class ConnectionController {
     public String PrintQuery (HttpServletResponse response,@RequestBody QueryDTO query) throws JRException, FileNotFoundException {
     String queryString = query.getQuery();
     List<Map> documents = databaseService.excutequery(queryString,"TTTN");
-//    System.out.println(documents);
+    System.out.println(documents.get(0).get("_id"));
+    Object id = documents.get(0).get("_id");
+    String idReport = id.toString();
     JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(documents);
     InputStream reportInput = new FileInputStream("C:\\Users\\ACER\\JaspersoftWorkspace\\MyReports\\test.jrxml");
     JasperReport jasperReport = JasperCompileManager.compileReport(reportInput);
     JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
-    JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\ACER\\helo.pdf");
+    JasperExportManager.exportReportToPdfFile(jasperPrint, "C:\\Users\\ACER\\"+idReport+".pdf");
 //    System.out.println(jasperPrint);
     return  documents.toString();
     }
-
+    @GetMapping("/execute1")
+      public String PrintQuery1 (HttpServletResponse response,@RequestBody QueryDTO query) throws JRException, FileNotFoundException {
+        String queryString = query.getQuery();
+        String collection =query.getCollection();
+        String form = query.getForm();
+        System.out.println(query.getCollection());
+        List<Map> documents = databaseService.excutequery(queryString,collection);
+        Object id = documents.get(0).get("_id");
+        String idReport = id.toString();
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(documents);
+        InputStream reportInput = new FileInputStream("C:\\Users\\ACER\\JaspersoftWorkspace\\MyReports\\"+form+".jrxml");
+        JasperReport jasperReport = JasperCompileManager.compileReport(reportInput);
+        String link = "C:\\Users\\ACER\\"+idReport+".pdf";
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, null, dataSource);
+        JasperExportManager.exportReportToPdfFile(jasperPrint, link);
+        return  link;
+    }
+    @GetMapping("checkDatabase")
+    public Set<String> CollectionNames (){
+        return databaseService.getMongoTemplate().getCollectionNames();
+    }
 }
